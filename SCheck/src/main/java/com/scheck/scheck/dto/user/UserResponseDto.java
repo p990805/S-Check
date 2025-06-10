@@ -1,13 +1,14 @@
 package com.scheck.scheck.dto.user;
 
 import com.scheck.scheck.entity.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@Builder
 public class UserResponseDto {
     private Long userId;
     private String nickname;
