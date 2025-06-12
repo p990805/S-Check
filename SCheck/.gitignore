@@ -38,3 +38,4 @@ out/
 
 application.yml
 .properties
+JwtConfig.java
