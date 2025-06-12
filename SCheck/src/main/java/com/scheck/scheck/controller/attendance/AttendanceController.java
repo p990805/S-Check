@@ -1,4 +1,4 @@
-package com.scheck.scheck.controller.controller;
+package com.scheck.scheck.controller.attendance;
 
 import com.scheck.scheck.dto.attendance.*;
 import com.scheck.scheck.service.attendance.AttendanceService;

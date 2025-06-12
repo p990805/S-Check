@@ -1,6 +1,7 @@
 package com.scheck.scheck.controller.user;
 
 import com.scheck.scheck.dto.user.KakaoLoginRequestDto;
+import com.scheck.scheck.dto.user.LoginResponseDto;
 import com.scheck.scheck.dto.user.UserResponseDto;
 import com.scheck.scheck.dto.user.UserUpdateRequestDto;
 import com.scheck.scheck.service.user.UserService;
@@ -15,9 +16,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login/kakao")
-    public ResponseEntity<UserResponseDto> kakaoLogin(@RequestBody KakaoLoginRequestDto requestDto){
-        UserResponseDto userResponse = userService.loginOrRegister(requestDto);
-        return ResponseEntity.ok(userResponse);
+    public ResponseEntity<LoginResponseDto> kakaoLogin(@RequestBody KakaoLoginRequestDto requestDto){
+        LoginResponseDto loginResponse = userService.loginOrRegister(requestDto);
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PutMapping("/{userId}")
@@ -30,5 +31,14 @@ public class UserController {
     public ResponseEntity<Boolean> existsByKakaoId(@PathVariable String kakaoId) {
         boolean exists = userService.existsByKakaoId(kakaoId);
         return ResponseEntity.ok(exists);
+    }
+
+    // 토큰 갱신 엔드포인트
+    @PostMapping("/refresh")
+    public ResponseEntity<LoginResponseDto> refreshToken(@RequestHeader("Authorization") String refreshToken) {
+        // Bearer 접두사 제거
+        String token = refreshToken.replace("Bearer ", "");
+        LoginResponseDto loginResponse = userService.refreshToken(token);
+        return ResponseEntity.ok(loginResponse);
     }
 }
